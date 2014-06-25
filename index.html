@@ -1,0 +1,98 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="flipclock.css">
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+		<script src="flipclock.js"></script>
+		<style>
+		@font-face {
+		  font-family: 'lr_ot4';
+		  src: url('fonts/LandRoverOT4-Light.eot'); /* IE9 Compat Modes */
+		  src: url('fonts/LandRoverOT4-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+		       url('fonts/LandRoverOT4-Light.woff') format('woff'), /* Modern Browsers */
+		       url('fonts/LandRoverOT4-Light.ttf')  format('truetype'); /* Safari, Android, iOS */
+		       
+		  font-style:   normal;
+		  font-weight:  100;
+		}
+
+		body {
+			background-image: url(texture-darkest-grey.png);
+			background-color:#333;
+			font-family:'lr_ot4',Helvetica,Arial;
+		}
+		h1 {
+			position:absolute;
+			top:30px;
+			font-size:30px;
+			color:#fff;
+			font-weight:100;
+			font-style:normal;
+			text-align:center;
+			display:block;
+			width:100%;
+		}
+		.table {
+			display:table;
+			height:100%;
+			width:100%;
+
+			background-image: url(bg.jpg);
+			background-position:center center;
+			background-repeat: no-repeat;
+		}
+		.tablecell {
+			display:table-cell;
+			vertical-align: middle;
+		}
+		.flip-clock-divider .flip-clock-label {
+			color:white;
+			text-shadow:0 0 8px rgba(0,0,0,0.8);
+		}
+.clock {
+
+	width: 620px;
+height: 116px;
+margin: 0 auto;
+}
+		</style>		
+	</head>
+	<body>
+	<h1>COUNTDOWN TO D-DAY</h1>
+	<div class="table">
+		<div class="tablecell">
+			<div class="clock" ></div>
+		</div>
+	</div>
+	<div class="message"></div>
+
+	<script type="text/javascript">
+		var clock;
+		
+		$(document).ready(function() {
+			var date  = new Date(Date.UTC(2014, 5, 30, 13, 0, 0));
+			var now   = new Date();
+			var diff  = date.getTime()/1000 - now.getTime()/1000;
+
+			diff = 10;
+
+			clock = $('.clock').FlipClock(diff, {
+		        clockFace: 'DailyCounter',
+		        countdown: true,
+		        callbacks: {
+		        	stop: function() {
+		        		$('#car')[0].play();
+		        	}
+		        }
+		    });
+
+		});
+		
+	</script>
+	<audio id="car">
+	<source src="car.mp3" type="audio/mpeg">
+	<source src="car.ogg" type="audio/ogg">
+	</audio>
+	</body>
+</html>
